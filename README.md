@@ -1,10 +1,10 @@
-<a href="https://demo-nextjs-with-supabase.vercel.app/">
-  <img alt="Next.js and Supabase Starter Kit - the fastest way to build apps with Next.js and Supabase" src="https://demo-nextjs-with-supabase.vercel.app/opengraph-image.png">
-  <h1 align="center">Next.js and Supabase Starter Kit</h1>
+<a href="https://grayola-test-jairo.vercel.app/">
+  <img alt="Next.js and Supabase Starter Kit - the fastest way to build apps with Next.js and Supabase" src="https://res.cloudinary.com/djovzus5i/image/upload/v1724418810/hu8mv8ryibpclx4ogwa1.png">
+  <h1 align="center">Grayola Test Jairo</h1>
 </a>
 
 <p align="center">
- The fastest way to build apps with Next.js and Supabase
+Built with Next.js and Supabase
 </p>
 
 <p align="center">
@@ -17,6 +17,7 @@
 </p>
 <br/>
 
+This project is a web application for managing design projects, built with Next.js for the frontend and styled using Tailwind CSS. It utilizes Supabase for the backend, providing a robust database solution. The application supports multiple user roles, including Clients, Project Managers, and Designers, each with tailored permissions. Clients can submit requests and track progress, while Project Managers oversee timelines and resources, and Designers collaborate on project briefs. With features like real-time collaboration and task assignment, this application enhances communication and streamlines the design process.
 ## Features
 
 - Works across the entire [Next.js](https://nextjs.org) stack
@@ -82,12 +83,4 @@ If you wish to just develop locally and not deploy to Vercel, [follow the steps 
 
 > Check out [the docs for Local Development](https://supabase.com/docs/guides/getting-started/local-development) to also run Supabase locally.
 
-## Feedback and issues
 
-Please file feedback and issues over on the [Supabase GitHub org](https://github.com/supabase/supabase/issues/new/choose).
-
-## More Supabase examples
-
-- [Next.js Subscription Payments Starter](https://github.com/vercel/nextjs-subscription-payments)
-- [Cookie-based Auth and the Next.js 13 App Router (free course)](https://youtube.com/playlist?list=PL5S4mPUpp4OtMhpnp93EFSo42iQ40XjbF)
-- [Supabase Auth and the Next.js App Router](https://github.com/supabase/supabase/tree/master/examples/auth/nextjs)
