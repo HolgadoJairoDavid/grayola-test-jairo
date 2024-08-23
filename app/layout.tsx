@@ -9,7 +9,7 @@ import HeaderComponent from "@/components/header-comp";
 
 const defaultUrl = process.env.VERCEL_URL
   ? `https://${process.env.VERCEL_URL}`
-  : "http://localhost:3000";
+  : "https://grayola-test-jairo.vercel.app";
 
 export const metadata = {
   metadataBase: new URL(defaultUrl),
