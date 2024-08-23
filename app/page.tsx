@@ -1,54 +1,53 @@
-import DeployButton from "../components/DeployButton";
-import AuthButton from "../components/AuthButton";
-import { createClient } from "@/utils/supabase/server";
-import ConnectSupabaseSteps from "@/components/tutorial/ConnectSupabaseSteps";
-import SignUpUserSteps from "@/components/tutorial/SignUpUserSteps";
-import Header from "@/components/Header";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import Image from "next/image";
+import { ArrowRight } from "lucide-react";
+import Link from "next/link";
+import CardCreation from "@/components/projects/card-creation";
 
 export default async function Index() {
-  const canInitSupabaseClient = () => {
-    // This function is just for the interactive tutorial.
-    // Feel free to remove it once you have Supabase connected.
-    try {
-      createClient();
-      return true;
-    } catch (e) {
-      return false;
-    }
-  };
-
-  const isSupabaseConnected = canInitSupabaseClient();
-
   return (
-    <div className="flex-1 w-full flex flex-col gap-20 items-center">
-      <nav className="w-full flex justify-center border-b border-b-foreground/10 h-16">
-        <div className="w-full max-w-4xl flex justify-between items-center p-3 text-sm">
-          <DeployButton />
-          {isSupabaseConnected && <AuthButton />}
-        </div>
-      </nav>
-
-      <div className="flex-1 flex flex-col gap-20 max-w-4xl px-3">
-        <Header />
-        <main className="flex-1 flex flex-col gap-6 px-4">
-          <h2 className="font-bold text-2xl mb-4">Next steps</h2>
-          {isSupabaseConnected ? <SignUpUserSteps /> : <ConnectSupabaseSteps />}
-        </main>
+    <section className="flex gap-20 items-center max-w-7xl px-8 mt-32">
+      <div>
+      <div className="max-w-4xl flex md:flex-row flex-col gap-2 items-center mb-8 justify-center">
+        <h1 className="font-bold md:text-3xl text-2xl text-black text-center">
+          <div className="mb-4">
+          A versatile {" "}
+          <span className="bg-green-200">team  ready</span> to engage
+          </div>
+          
+          with projects of {" "}
+          <span className="bg-red-200">all dimensions</span>
+        </h1>
       </div>
+      <div className="flex gap-4 md:flex-row flex-col">
+        <CardCreation />
+        <Card className="hover:bg-slate-100">
+          <Link href={"/projects"}>
+            <CardHeader>
+              <CardTitle className="text-black md:text-2xl text-xl">
+                View my projects
+              </CardTitle>
+              <CardContent className="flex items-center gap-4 p-0">
+                <CardDescription className="text-base text-black text-sm">
+                View all the projects we are actively developing
+                </CardDescription>
+                <ArrowRight className="w-12 h-12 text-black hover:scale-110 transition-colors duration-500 ease" />
+              </CardContent>
+            </CardHeader>
+          </Link>
+        </Card>
 
-      <footer className="w-full border-t border-t-foreground/10 p-8 flex justify-center text-center text-xs">
-        <p>
-          Powered by{" "}
-          <a
-            href="https://supabase.com/?utm_source=create-next-app&utm_medium=template&utm_term=nextjs"
-            target="_blank"
-            className="font-bold hover:underline"
-            rel="noreferrer"
-          >
-            Supabase
-          </a>
-        </p>
-      </footer>
-    </div>
+      </div>
+      </div>
+        <div className="hidden md:block">
+        <Image src="/cuervi.svg" alt="" width={600} height={600} className="pt-[25%] pl-[10%] pr-[10%]"/>
+        </div>
+    </section>
   );
 }

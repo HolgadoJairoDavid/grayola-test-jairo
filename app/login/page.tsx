@@ -1,88 +1,67 @@
 import Link from "next/link";
-import { createClient } from "@/utils/supabase/server";
-import { redirect } from "next/navigation";
-import { SubmitButton } from "../../components/forms/submit-button";
-import { Label } from "@/components/forms/label";
-import { Input } from "@/components/forms/input";
-import { FormMessage, Message } from "@/components/forms/form-message";
-import { encodedRedirect } from "@/utils/utils";
+import { UserAuthForm } from "@/components/auth/user-auth-form";
+import Image from "next/image";
+import { Icons } from "@/components/ui/icons";
+import { signIn, signUp, signInWithGoogle } from "./actions";
 
-export default function Login({ searchParams }: { searchParams: Message }) {
-  const signIn = async (formData: FormData) => {
-    "use server";
-
-    const email = formData.get("email") as string;
-    const password = formData.get("password") as string;
-    const supabase = createClient();
-
-    const { error } = await supabase.auth.signInWithPassword({
-      email,
-      password,
-    });
-
-    if (error) {
-      return encodedRedirect("error", "/login", "Could not authenticate user");
-    }
-
-    return redirect("/protected");
-  };
-
+export default function Login({
+  searchParams,
+}: {
+  searchParams: { message: string };
+}) {
   return (
-    <div className="flex flex-col flex-1 p-4 w-full items-center">
-      <Link
-        href="/"
-        className="absolute left-8 top-8 py-2 px-4 rounded-md no-underline text-foreground bg-btn-background hover:bg-btn-background-hover flex items-center group text-sm"
+    <>
+    <div className="absolute bg-slate-100 w-[50%] h-screen left-0" />
+      <div className="flex top-10 bottom-10 h-[90%] w-[70%] shadow-xl absolute rounded-2xl">
+      <div
+        className="container relative flex items-center justify-center lg:px-0 bg-white"
       >
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          width="24"
-          height="24"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="2"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          className="mr-2 h-4 w-4 transition-transform group-hover:-translate-x-1"
-        >
-          <polyline points="15 18 9 12 15 6" />
-        </svg>{" "}
-        Back
-      </Link>
 
-      <form className="flex-1 flex flex-col w-full justify-center gap-2 text-foreground [&>input]:mb-6 max-w-md p-4">
-        <h1 className="text-2xl font-medium">Log in</h1>
-        <p className="text-sm text-foreground/60">
-          Don't have an account?{" "}
-          <Link className="text-blue-600 font-medium underline" href="/signup">
-            Sign up
-          </Link>
-        </p>
-        <div className="flex flex-col gap-2 [&>input]:mb-3 mt-8">
-          <Label htmlFor="email">Email</Label>
-          <Input name="email" placeholder="you@example.com" required />
-          <div className="flex justify-between items-center">
-            <Label htmlFor="password">Password</Label>
-
-            <Link
-              className="text-sm text-blue-600 underline"
-              href="/forgot-password"
-            >
-              Forgot Password?
-            </Link>
+        <div className="">
+          <div className="mx-auto flex w-full flex-col justify-center space-y-6 sm:w-[350px]">
+          <h3 className="text-7xl font-bold text-center">Grayola</h3>
+            <div className="flex flex-col space-y-2 text-center justify-center">
+              <h1 className="text-2xl font-semibold tracking-tight">
+              Welcome back - Ready to Start?
+              </h1>
+              <p className="text-sm text-muted-foreground w-full">
+              Create an account or log in
+              </p>
+            </div>
+            <UserAuthForm
+              signIn={signIn}
+              signUp={signUp}
+              continueWith={signInWithGoogle}
+              />
+            <p className="px-8 text-center text-sm text-muted-foreground">
+              By clicking continue, you agree to our{" "}
+              <Link
+                href="/terms"
+                className="underline underline-offset-4 hover:text-primary"
+                >
+                Terms of Service
+              </Link>{" "}
+              and{" "}
+              <Link
+                href="/privacy"
+                className="underline underline-offset-4 hover:text-primary"
+                >
+                Privacy Policy
+              </Link>
+              .
+            </p>
+            {searchParams?.message && (
+              <p className="mt-4 p-4 bg-foreground/10 text-foreground text-center">
+                {searchParams.message}
+              </p>
+            )}
           </div>
-          <Input
-            type="password"
-            name="password"
-            placeholder="••••••••"
-            required
-          />
-          <SubmitButton formAction={signIn} pendingText="Signing In...">
-            Log in
-          </SubmitButton>
-          <FormMessage message={searchParams} />
         </div>
-      </form>
-    </div>
+      </div>
+      <div className="bg-slate-100 z-10 hidden md:block w-full justify-center items-center">
+           <Image src="/Group.svg" alt="" width={700} height={700} className="pt-[25%] pl-[10%] pr-[10%]"/>
+      </div> 
+      </div>
+    </>
   );
 }
